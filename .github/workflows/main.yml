@@ -15,27 +15,23 @@ jobs:
       matrix:
         config:
           - {
-              name: "Build - Windows",
+              name: "build (Windows)",
               os: windows-latest,
-              action: actions/build,
             }
           - {
-              name: "Build - Ubuntu 20.04",
+              name: "build (Ubuntu 20.04)",
               os: ubuntu-20.04,
-              action: actions/build,
             }
           - {
-              name: "Build - Ubuntu 18.04",
+              name: "build (Ubuntu 18.04)",
               os: ubuntu-latest,
-              action: actions/build,
             }
           - {
-              name: "macOS",
+              name: "build (macOS)",
               os: macos-latest,
-              action: actions/build,
             }
     steps:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Build
-        uses: ${{ matrix.config.action }}
+        uses: ./actions/build
