@@ -1,0 +1,41 @@
+name: ABuild
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+   build:
+    name: ${{ matrix.config.name }}
+    runs-on: ${{ matrix.config.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        config:
+          - {
+              name: "Build - Windows",
+              os: windows-latest,
+              action: actions/build,
+            }
+          - {
+              name: "Build - Ubuntu 20.04",
+              os: ubuntu-20.04,
+              action: actions/build,
+            }
+          - {
+              name: "Build - Ubuntu 18.04",
+              os: ubuntu-latest,
+              action: actions/build,
+            }
+          - {
+              name: "macOS",
+              os: macos-latest,
+              action: actions/build,
+            }
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Build
+        uses: ${{ matrix.config.action }}
