@@ -21,6 +21,7 @@
         "@actions/core": "^1.2.6",
         "@actions/exec": "^1.0.4",
         "fs": "0.0.1-security",
+        "os": "^0.1.1",
         "path": "^0.12.7"
     },
     "devDependencies": {

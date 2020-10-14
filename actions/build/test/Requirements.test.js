@@ -45,4 +45,15 @@ describe("validate()", () => {
         };
         expect(validator).not.toThrow();
     });
+
+    test("[missing build interpreter]", () => {
+        const validator = () => {
+            let requirements = new Requirements();
+            requirements._interpreter = `interpreter.exe`;
+            requirements.validate();
+        };
+        expect(validator).toThrow(
+            `Build script interpreter 'interpreter.exe' is not available`
+        );
+    });
 });
