@@ -3,142 +3,6 @@ module.exports =
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
-/***/ 428:
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-// ESM COMPAT FLAG
-__webpack_require__.r(__webpack_exports__);
-
-// EXTERNAL MODULE: ./node_modules/@actions/exec/lib/exec.js
-var exec = __webpack_require__(974);
-
-// EXTERNAL MODULE: external "path"
-var external_path_ = __webpack_require__(622);
-var external_path_default = /*#__PURE__*/__webpack_require__.n(external_path_);
-
-// EXTERNAL MODULE: ./node_modules/@actions/core/lib/core.js
-var core = __webpack_require__(861);
-var core_default = /*#__PURE__*/__webpack_require__.n(core);
-
-// EXTERNAL MODULE: external "os"
-var external_os_ = __webpack_require__(87);
-var external_os_default = /*#__PURE__*/__webpack_require__.n(external_os_);
-
-// CONCATENATED MODULE: ./src/Base.js
-
-
-
-class Base {
-    constructor(projectRoot = "") {
-        this._root = projectRoot == "" ? process.cwd() : projectRoot;
-        this._interpreter =
-            (external_os_default()).platform == "win32" ? "C:/Program Files/Git/bin/bash.exe" : "";
-        this._buildScript = external_path_default().join(this.root(), "build.sh");
-    }
-
-    buildInterpreter() {
-        return this._interpreter;
-    }
-
-    buildScript() {
-        return this._buildScript;
-    }
-
-    root() {
-        return this._root;
-    }
-}
-
-// EXTERNAL MODULE: external "fs"
-var external_fs_ = __webpack_require__(747);
-var external_fs_default = /*#__PURE__*/__webpack_require__.n(external_fs_);
-
-// CONCATENATED MODULE: ./src/Requirements.js
-
-
-
-class Requirements extends Base {
-    _buildScriptExists() {
-        if (!external_fs_default().existsSync(this.buildScript())) {
-            throw `Cannot find build script '${this.buildScript()}'`;
-        }
-    }
-
-    _buildScriptIsExecutable() {
-        try {
-            external_fs_default().accessSync(this.buildScript(), (external_fs_default()).constants.X_OK);
-        } catch {
-            throw `Build script '${this.buildScript}' is not executable (missing executable permissions).`;
-        }
-    }
-
-    _buildInterpreterIsAvailable() {
-        if (this.buildInterpreter() != "") {
-            try {
-                external_fs_default().accessSync(this.buildInterpreter());
-            } catch {
-                throw `Build script interpreter '${this.buildInterpreter()}' is not available`;
-            }
-        }
-    }
-
-    validate() {
-        this._buildInterpreterIsAvailable();
-        this._buildScriptExists();
-        this._buildScriptIsExecutable();
-    }
-}
-
-// CONCATENATED MODULE: ./src/Builder.js
-
-
-
-
-class Builder extends Base {
-    async build() {
-        const buildCommand = this.buildInterpreter()
-            ? `"${this.buildInterpreter()}" "${this.buildScript()}"`
-            : `"${this.buildScript()}"`;
-        await (0,exec.exec)(buildCommand);
-    }
-}
-
-// CONCATENATED MODULE: ./index.js
-
-
-
-
-function logSection(section) {
-    core_default().info(section.toUpperCase());
-    core_default().info("-".repeat(section.length));
-}
-
-function validate() {
-    new Requirements().validate();
-}
-
-async function build() {
-    await new Builder().build();
-}
-
-async function main() {
-    try {
-        logSection("Build");
-        validate();
-        await build();
-        logSection("SUCCESS");
-    } catch (error) {
-        logSection("Failed");
-        core_default().error(error);
-        core_default().setFailed("Build failed");
-    }
-}
-
-main();
-
-
-/***/ }),
-
 /***/ 390:
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
@@ -1681,6 +1545,142 @@ function copyFile(srcFile, destFile, force) {
 
 /***/ }),
 
+/***/ 660:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+// ESM COMPAT FLAG
+__webpack_require__.r(__webpack_exports__);
+
+// EXTERNAL MODULE: ./node_modules/@actions/exec/lib/exec.js
+var exec = __webpack_require__(974);
+
+// EXTERNAL MODULE: external "path"
+var external_path_ = __webpack_require__(622);
+var external_path_default = /*#__PURE__*/__webpack_require__.n(external_path_);
+
+// EXTERNAL MODULE: ./node_modules/@actions/core/lib/core.js
+var core = __webpack_require__(861);
+var core_default = /*#__PURE__*/__webpack_require__.n(core);
+
+// EXTERNAL MODULE: external "os"
+var external_os_ = __webpack_require__(87);
+var external_os_default = /*#__PURE__*/__webpack_require__.n(external_os_);
+
+// CONCATENATED MODULE: ./src/Base.js
+
+
+
+class Base {
+    constructor(projectRoot = "") {
+        this._root = projectRoot == "" ? process.cwd() : projectRoot;
+        this._interpreter =
+            (external_os_default()).platform == "win32" ? "C:/Program Files/Git/bin/bash.exe" : "";
+        this._buildScript = external_path_default().join(this.root(), "build.sh");
+    }
+
+    buildInterpreter() {
+        return this._interpreter;
+    }
+
+    buildScript() {
+        return this._buildScript;
+    }
+
+    root() {
+        return this._root;
+    }
+}
+
+// EXTERNAL MODULE: external "fs"
+var external_fs_ = __webpack_require__(747);
+var external_fs_default = /*#__PURE__*/__webpack_require__.n(external_fs_);
+
+// CONCATENATED MODULE: ./src/Requirements.js
+
+
+
+class Requirements extends Base {
+    _buildScriptExists() {
+        if (!external_fs_default().existsSync(this.buildScript())) {
+            throw `Cannot find build script '${this.buildScript()}'`;
+        }
+    }
+
+    _buildScriptIsExecutable() {
+        try {
+            external_fs_default().accessSync(this.buildScript(), (external_fs_default()).constants.X_OK);
+        } catch {
+            throw `Build script '${this.buildScript}' is not executable (missing executable permissions).`;
+        }
+    }
+
+    _buildInterpreterIsAvailable() {
+        if (this.buildInterpreter() != "") {
+            try {
+                external_fs_default().accessSync(this.buildInterpreter());
+            } catch {
+                throw `Build script interpreter '${this.buildInterpreter()}' is not available`;
+            }
+        }
+    }
+
+    validate() {
+        this._buildInterpreterIsAvailable();
+        this._buildScriptExists();
+        this._buildScriptIsExecutable();
+    }
+}
+
+// CONCATENATED MODULE: ./src/Builder.js
+
+
+
+
+class Builder extends Base {
+    async build() {
+        const buildCommand = this.buildInterpreter()
+            ? `"${this.buildInterpreter()}" "${this.buildScript()}"`
+            : `"${this.buildScript()}"`;
+        await (0,exec.exec)(buildCommand);
+    }
+}
+
+// CONCATENATED MODULE: ./index.cjs
+
+
+
+
+function logSection(section) {
+    core_default().info(section.toUpperCase());
+    core_default().info("-".repeat(section.length));
+}
+
+function validate() {
+    new Requirements().validate();
+}
+
+async function build() {
+    await new Builder().build();
+}
+
+async function main() {
+    try {
+        logSection("Build");
+        validate();
+        await build();
+        logSection("SUCCESS");
+    } catch (error) {
+        logSection("Failed");
+        core_default().error(error);
+        core_default().setFailed("Build failed");
+    }
+}
+
+main();
+
+
+/***/ }),
+
 /***/ 357:
 /***/ ((module) => {
 
@@ -1808,6 +1808,6 @@ module.exports = require("util");
 /******/ 	// module exports must be returned from runtime so entry inlining is disabled
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(428);
+/******/ 	return __webpack_require__(660);
 /******/ })()
 ;

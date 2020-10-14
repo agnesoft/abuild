@@ -3,7 +3,7 @@
     "version": "1.0.0",
     "description": "Build action",
     "type": "module",
-    "main": "index.js",
+    "main": "index.cjs",
     "scripts": {
         "test": "jest"
     },
