@@ -1,6 +1,6 @@
 import actions from "@actions/core";
-import Requirements from "src/Requirements.js";
-import Builder from "src/Builder.js";
+import Requirements from "./src/Requirements.js";
+import Builder from "./src/Builder.js";
 
 function logSection(section) {
     actions.info(section.toUpperCase());
