@@ -2,6 +2,7 @@
     "name": "build",
     "version": "1.0.0",
     "description": "Build action",
+    "type": "module",
     "main": "index.js",
     "scripts": {
         "test": "jest"
@@ -16,5 +17,15 @@
         "url": "https://github.com/Agnesoft/ABuild/issues"
     },
     "homepage": "https://github.com/Agnesoft/ABuild#readme",
-    "dependencies": {}
+    "dependencies": {
+        "@actions/core": "^1.2.6",
+        "@actions/exec": "^1.0.4",
+        "fs": "0.0.1-security",
+        "path": "^0.12.7"
+    },
+    "devDependencies": {
+        "@babel/preset-env": "^7.11.5",
+        "babel-jest": "^26.5.2",
+        "jest": "^26.5.3"
+    }
 }
