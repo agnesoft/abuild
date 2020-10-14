@@ -2,7 +2,7 @@
 
 Automated build system.
 
-GitHub Actions:
+## GitHub Actions:
 
 -   [build](actions/build/README.md)
 

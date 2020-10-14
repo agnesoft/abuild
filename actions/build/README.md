@@ -14,19 +14,19 @@ The build contract described here consists of the _requirements_ and the _build 
 
 ### Requirements
 
-The build requirments are prerequisites that the build action expects and validates before it executes any build steps. They are:
+The build requirements are prerequisites that the build action expects and validates before it executes any build steps. They are:
 
 -   The build script `build.sh` must be in the project root directory (current directory).
--   The build script `build.sh` must be executable.
--   WINDOWS ONLY: _Git Bash_ is availabe at path `C:/Program Files/Git/bin/bash.exe`
+-   LINUX/MAC OS: The build script `build.sh` must have executable permission.
+-   WINDOWS: _Git Bash_ is availabe in path `C:/Program Files/Git/bin/bash.exe`
 
 ### Build Steps
 
-The build steps are steps executed by the build action if all of the requirements have been met. They are in order:
+The build steps are steps executed by the build action if all of the requirements have been successfully validated. They are in order:
 
 -   Run build script `build.sh`.
 -   If the build script returns non-zero exit code it is considered a failure and additional steps are executed:
-    -   Prints the available details about the error (the exception)
+    -   Sets the failure text as the error annotation
     -   Sets the job as failed
 
 ## Development
