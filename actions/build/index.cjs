@@ -2,9 +2,19 @@ import actions from "@actions/core";
 import Requirements from "./src/Requirements.js";
 import Builder from "./src/Builder.js";
 
-function logSection(section) {
-    actions.info(section.toUpperCase());
-    actions.info("-".repeat(section.length));
+function logBanner(message) {
+    actions.info("");
+    actions.info("*".repeat(message.length + 4));
+    actions.info(`* ${message.toUpperCase()} *`);
+    actions.info("*".repeat(message.length + 4));
+}
+
+function succeeded() {
+    logBanner("succeeded");
+}
+
+function failed() {
+    logBanner("failed");
 }
 
 function validate() {
@@ -17,14 +27,12 @@ async function build() {
 
 async function main() {
     try {
-        logSection("Build");
         validate();
         await build();
-        logSection("SUCCESS");
+        succeeded();
     } catch (error) {
-        logSection("Failed");
-        actions.error(error);
-        actions.setFailed("Build failed");
+        failed();
+        actions.setFailed(`Build failed: ${error}`);
     }
 }
 

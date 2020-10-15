@@ -1641,7 +1641,7 @@ class Builder extends Base {
         const buildCommand = this.buildInterpreter()
             ? `"${this.buildInterpreter()}" "${this.buildScript()}"`
             : `"${this.buildScript()}"`;
-        await (0,exec.exec)(buildCommand);
+        await exec.exec(buildCommand);
     }
 }
 
@@ -1650,9 +1650,19 @@ class Builder extends Base {
 
 
 
-function logSection(section) {
-    core_default().info(section.toUpperCase());
-    core_default().info("-".repeat(section.length));
+function logBanner(message) {
+    core_default().info("");
+    core_default().info("*".repeat(message.length + 4));
+    core_default().info(`* ${message.toUpperCase()} *`);
+    core_default().info("*".repeat(message.length + 4));
+}
+
+function succeeded() {
+    logBanner("succeeded");
+}
+
+function failed() {
+    logBanner("failed");
 }
 
 function validate() {
@@ -1665,14 +1675,12 @@ async function build() {
 
 async function main() {
     try {
-        logSection("Build");
         validate();
         await build();
-        logSection("SUCCESS");
+        succeeded();
     } catch (error) {
-        logSection("Failed");
-        core_default().error(error);
-        core_default().setFailed("Build failed");
+        failed();
+        core_default().setFailed(`Build failed: ${error}`);
     }
 }
 

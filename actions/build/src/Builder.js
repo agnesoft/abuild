@@ -1,4 +1,4 @@
-import { exec } from "@actions/exec";
+import * as exec from "@actions/exec";
 
 import Base from "./Base.js";
 
@@ -7,6 +7,6 @@ export default class Builder extends Base {
         const buildCommand = this.buildInterpreter()
             ? `"${this.buildInterpreter()}" "${this.buildScript()}"`
             : `"${this.buildScript()}"`;
-        await exec(buildCommand);
+        await exec.exec(buildCommand);
     }
 }
