@@ -4,12 +4,14 @@ on:
   push:
     branches: [ main ]
     paths:
+      - .github/workflow/build.yml
       - actions/build/**.js
       - actions/build/**.yml
       - actions/build/**.sh
   pull_request:
     branches: [ main ]
     paths:
+      - .github/workflow/build.yml
       - actions/build/**.js
       - actions/build/**.yml
       - actions/build/**.sh
