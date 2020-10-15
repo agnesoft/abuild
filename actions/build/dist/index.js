@@ -18,7 +18,6 @@ var external_path_default = /*#__PURE__*/__webpack_require__.n(external_path_);
 
 // EXTERNAL MODULE: ./node_modules/@actions/core/lib/core.js
 var core = __webpack_require__(861);
-var core_default = /*#__PURE__*/__webpack_require__.n(core);
 
 // EXTERNAL MODULE: external "os"
 var external_os_ = __webpack_require__(87);
@@ -109,10 +108,10 @@ class Builder extends Base {
 
 
 function logBanner(message) {
-    core_default().info("");
-    core_default().info("*".repeat(message.length + 4));
-    core_default().info(`* ${message.toUpperCase()} *`);
-    core_default().info("*".repeat(message.length + 4));
+    core.info("");
+    core.info("*".repeat(message.length + 4));
+    core.info(`* ${message.toUpperCase()} *`);
+    core.info("*".repeat(message.length + 4));
 }
 
 function succeeded() {
@@ -138,7 +137,7 @@ async function main() {
         succeeded();
     } catch (error) {
         failed();
-        core_default().setFailed(`Build failed: ${error}`);
+        core.setFailed(`Build failed: ${error}`);
     }
 }
 

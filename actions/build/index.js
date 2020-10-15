@@ -1,4 +1,4 @@
-import actions from "@actions/core";
+import * as actions from "@actions/core";
 import Requirements from "./src/Requirements.js";
 import Builder from "./src/Builder.js";
 
