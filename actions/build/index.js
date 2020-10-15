@@ -9,12 +9,13 @@ function logBanner(message) {
     actions.info("*".repeat(message.length + 4));
 }
 
-function succeeded() {
-    logBanner("succeeded");
+function done() {
+    logBanner("done");
 }
 
-function failed() {
+function failed(error) {
     logBanner("failed");
+    actions.setFailed(error);
 }
 
 function projectRoot() {
@@ -33,10 +34,9 @@ async function main() {
     try {
         validate();
         await build();
-        succeeded();
+        done();
     } catch (error) {
-        failed();
-        actions.setFailed(`Build failed: ${error}`);
+        failed(error);
     }
 }
 

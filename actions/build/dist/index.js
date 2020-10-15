@@ -114,12 +114,13 @@ function logBanner(message) {
     core.info("*".repeat(message.length + 4));
 }
 
-function succeeded() {
-    logBanner("succeeded");
+function done() {
+    logBanner("done");
 }
 
-function failed() {
+function failed(error) {
     logBanner("failed");
+    core.setFailed(error);
 }
 
 function projectRoot() {
@@ -138,10 +139,9 @@ async function main() {
     try {
         validate();
         await build();
-        succeeded();
+        done();
     } catch (error) {
-        failed();
-        core.setFailed(`Build failed: ${error}`);
+        failed(error);
     }
 }
 
