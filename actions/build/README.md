@@ -36,3 +36,11 @@ After each modification the action must be compiled and the resulting files `dis
 ```
 ncc build index.js --license licenses.txt
 ```
+
+Also to run the action locally you must add:
+
+```
+"type": "module"
+```
+
+to the package.json but DO NOT COMMIT IT!
