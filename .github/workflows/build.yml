@@ -1,33 +1,37 @@
-name: ABuild
+name: build
 
 on:
   push:
     branches: [ main ]
+    paths:
+      - actions/build/**.js
+      - actions/build/**.yml
+      - actions/build/**.sh
   pull_request:
     branches: [ main ]
+    paths:
+      - actions/build/**.js
+      - actions/build/**.yml
+      - actions/build/**.sh
 
 jobs:
   build:
-    name: ${{ matrix.config.name }}
+    name: ${{ matrix.config.os }}
     runs-on: ${{ matrix.config.os }}
     strategy:
       fail-fast: false
       matrix:
         config:
           - {
-              name: "build (Windows)",
               os: windows-latest,
             }
           - {
-              name: "build (Ubuntu 20.04)",
               os: ubuntu-20.04,
             }
           - {
-              name: "build (Ubuntu 18.04)",
               os: ubuntu-latest,
             }
           - {
-              name: "build (macOS)",
               os: macos-latest,
             }
     steps:
