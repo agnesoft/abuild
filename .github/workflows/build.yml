@@ -47,7 +47,7 @@ jobs:
         run: |
           cd actions/build
           npm test
-      - name: Run Build Action
+      - name: Run Action
         uses: ./actions/build
         with:
           path: ./actions/build/test/valid/
