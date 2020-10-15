@@ -17,12 +17,16 @@ function failed() {
     logBanner("failed");
 }
 
+function projectRoot() {
+    actions.getInput("path");
+}
+
 function validate() {
-    new Requirements().validate();
+    new Requirements(projectRoot()).validate();
 }
 
 async function build() {
-    await new Builder().build();
+    await new Builder(projectRoot()).build();
 }
 
 async function main() {

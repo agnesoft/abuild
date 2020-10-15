@@ -1,5 +1,9 @@
 name: 'build'
 description: 'Builds a repository'
+inputs:
+  path:
+    description: 'Optional path to the project root directory within the repository. If not set the repository root is the project root directory.'
+    required: false
 runs:
   using: node12
   main: dist/index.js

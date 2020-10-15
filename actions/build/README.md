@@ -6,6 +6,8 @@ The `build` action executes a build steps according to the specified build contr
 
 ```
 - uses: ./actions/build
+  with:
+    path: '' # Optional path to the project directory within the repository. If not set the repository root is the project directory.
 ```
 
 ## Build Contract

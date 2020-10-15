@@ -43,3 +43,5 @@ jobs:
           npm test
       - name: Run Build Action
         uses: ./actions/build
+        with:
+          path: ./actions/build/test/valid/
