@@ -7,7 +7,7 @@ on:
     branches: [ main ]
 
 jobs:
-   build:
+  build:
     name: ${{ matrix.config.name }}
     runs-on: ${{ matrix.config.os }}
     strategy:
@@ -33,5 +33,15 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Build
+      - name: Install Packages
+        run: |
+          cd actions/build
+          npm install
+      - name: Run Tests
+        run: |
+          cd actions/build
+          npm test
+      - name: Run Build Action
         uses: ./actions/build
+        with:
+          path: ./actions/build/test/valid/
