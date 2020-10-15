@@ -34,5 +34,5 @@ The build steps are steps executed by the build action if all of the requirement
 After each modification the action must be compiled and the resulting files `dist/index.js` and `dist/licenses.txt` must be committed:
 
 ```
-ncc build index.mjs --license licenses.txt
+ncc build index.cjs --license licenses.txt
 ```

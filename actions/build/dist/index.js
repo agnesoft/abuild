@@ -3,7 +3,7 @@ module.exports =
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
-/***/ 554:
+/***/ 428:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 // ESM COMPAT FLAG
@@ -103,7 +103,7 @@ class Builder extends Base {
     }
 }
 
-// CONCATENATED MODULE: ./index.mjs
+// CONCATENATED MODULE: ./index.js
 
 
 
@@ -1816,6 +1816,6 @@ module.exports = require("util");
 /******/ 	// module exports must be returned from runtime so entry inlining is disabled
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(554);
+/******/ 	return __webpack_require__(428);
 /******/ })()
 ;
