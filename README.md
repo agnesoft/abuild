@@ -1,6 +1,6 @@
 # ABuild
 
-![ABuild](https://github.com/Agnesoft/ABuild/workflows/ABuild/badge.svg)
+![build](https://github.com/Agnesoft/ABuild/workflows/build/badge.svg)
 
 Automated build system.
 
