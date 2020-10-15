@@ -2,8 +2,7 @@
     "name": "build",
     "version": "1.0.0",
     "description": "Build action",
-    "type": "module",
-    "main": "index.cjs",
+    "main": "index.js",
     "scripts": {
         "test": "jest"
     },
