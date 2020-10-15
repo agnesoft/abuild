@@ -1,5 +1,7 @@
 # ABuild
 
+![ABuild](https://github.com/Agnesoft/ABuild/workflows/ABuild/badge.svg)
+
 Automated build system.
 
 ## GitHub Actions:
