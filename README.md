@@ -2,7 +2,7 @@
 
 ![build](https://github.com/Agnesoft/ABuild/workflows/build/badge.svg?branch=main)
 
-Automated build system.
+Collection of build actions and build tools.
 
 ## GitHub Actions:
 
