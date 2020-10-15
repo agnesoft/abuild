@@ -1,6 +1,6 @@
-# ABuild
+# abuild
 
-![build](https://github.com/Agnesoft/ABuild/workflows/build/badge.svg?branch=main)
+![build](https://github.com/agnesoft/abuild/workflows/build/badge.svg?branch=main)
 
 Collection of build actions and build tools.
 
