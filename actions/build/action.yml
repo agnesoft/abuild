@@ -2,4 +2,4 @@ name: 'build'
 description: 'Builds a repository'
 runs:
   using: node12
-  main: dist/index.cjs
+  main: dist/index.js
