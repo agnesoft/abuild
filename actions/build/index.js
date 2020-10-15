@@ -18,7 +18,7 @@ function failed() {
 }
 
 function projectRoot() {
-    actions.getInput("path");
+    return actions.getInput("path");
 }
 
 function validate() {

@@ -123,7 +123,7 @@ function failed() {
 }
 
 function projectRoot() {
-    core.getInput("path");
+    return core.getInput("path");
 }
 
 function validate() {
