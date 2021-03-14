@@ -45,6 +45,24 @@ Build generators are special kind of build system that does not orchestrate the 
 
 The declarative build systems organize translation units (and headers) into projects that typically correspond to the desired outputs (applications, libraries). The dependencies are then set manually between the individual projects. The build itself is orchestrated using generalized "rules" provided by the build system and applied to the project's source files. Optionally user can customize the rules to various degree. Examples of declarative build systems are [Bazel](https://en.wikipedia.org/wiki/Bazel_(software)), [build2](https://build2.org/) or [boost.build (b2)](https://boostorg.github.io/build/).
 
+- All of the declarative build systems offer multiple targets and configurations and offer compiler toolchain usage consistency. 
+- None of the existing build systems can run without prior configuration of the project in form of project/build files (often using other languages). It is sometimes possible to simplify the project setup to some degree.
+- Only some of the build systems provide transparency so that the actual commands run against the compiler toolchain can be inspected.
+- None of the existing build systems support automatic dependency resolution (closest comes `boost.build`) - all of them require manual setup of dependencies often in multiple steps: introducing the dependency in the sources, setting up include directories (not always needed) in the build system for a given project and finally adding the dependency to another target.
+- None of the existing build systems currently support C++20 modules as an alternative to headers.
+
 ## ABuild
 
+The **Agnesoft Build** or **ABuild** is a C++ build system. It provides fully automatic project detection including dependencies based on source inspection. The goal is to not having to require any configuration of any kind when writing C++ by adhering to a well defined project and file structure. By ivoking `abuild` in a project root directory it shall detect all targets, their dependencies and build them using sensible defaults for an available compiler toolchain. If a different behavior than that detectable by the source scanner is required it can be specified as a command line argument (e.g. build in `debug` mode) or via optional configuration file (e.g. for cross compilation or if specific compiler flags are required).
 
+### Source Scanner
+
+
+### Dependency Resolution
+
+
+### Configuration
+
+#### Command Line
+
+#### Configuration File
