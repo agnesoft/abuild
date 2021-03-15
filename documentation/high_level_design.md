@@ -53,16 +53,68 @@ The declarative build systems organize translation units (and headers) into proj
 
 ## ABuild
 
-The **Agnesoft Build** or **ABuild** is a C++ build system. It provides fully automatic project detection including dependencies based on source inspection. The goal is to not having to require any configuration of any kind when writing C++ by adhering to a well defined project and file structure. By ivoking `abuild` in a project root directory it shall detect all targets, their dependencies and build them using sensible defaults for an available compiler toolchain. If a different behavior than that detectable by the source scanner is required it can be specified as a command line argument (e.g. build in `debug` mode) or via optional configuration file (e.g. for cross compilation or if specific compiler flags are required).
+The **Agnesoft Build** or **ABuild** is a C++ build system. It provides fully automatic project detection including dependencies based on source inspection. The goal is to be able to run without any configuration of any kind when writing C++ by adhering to a well defined project and file structure instead. By ivoking `abuild` in a project root directory it shall detect all targets, their dependencies and build them using sensible defaults for an available compiler toolchain. If a different behavior than that detectable by the source scanner is required it can be specified as a command line argument (e.g. build in `debug` mode) or via optional configuration file (e.g. for cross compilation or if specific compiler flags are required).
 
-### Source Scanner
+### Build Scanner
 
+The build scanner component is responsible for detecting the available compiler toolchain(s) and to scan the project starting from the current working directory. The environment scanner will attempt to find the compiler toolchain in its typical location given the current host.
+
+The project scanner will detect all translation units inthe current directory and any subdirectories. The translation units will be analyzed for includes and imports. They will then be divided into `projects` that each represent a binary output. For example directories containing `main.c[xx|pp|c]` or a translation unit with a `main` function will become applications, directories with the `[tT]est` at the end will become test applications, other directories will become libraries etc. Commonly used names such as `src` or `include` will be "squashed" into their respective parent projects and linked (if translation units) or bundled (if headers) with it. It is possible to nest projects to compose names with `.` as a separator in the name (e.g. `MyProject/MyApp` -> `MyProject.MyApp`).
 
 ### Dependency Resolution
 
+After the analysis the dependency resolution will try to find each of the included file (in case of headers) or exported module (in case of modules) and establish a dependency. On Unix systems that support system wide libraries these can be automatically detected as well. On Windows only limited number of libraries with known install locations (e.g. LLVM) can be automatically detected. For all custom third part dependencies a configuration is required. Result of the depenency resolution is the build graph with all the required for building output as a build cache - a JSON file that also doubles as a compilation database.
+
+Example build cache:
+```
+{
+    "Toolchain: {
+        "name": "msvc",
+        "compiler: "C:/Program Files/.../cl.exe",
+        "cxxflags: [ "/std:c++latest" ]
+    },
+    "Projects": {
+        "MyProject": {
+            "MyProject: {
+                "paths: [ "src/MyProject", "src/MyProject/include" ]
+            }
+        }
+    },
+    "TranslationUnits": {
+        "src/MyProject/main.cpp": {
+            "dependencies": []
+        }
+    }
+}
+```
 
 ### Configuration
 
-#### Command Line
+By default no configuration of any kind is required. The build configuration will be `release` with `optimizations`, `exceptions`, `RTTI` and most `warnings` enabled. These settings are considered standard C++. If you need to change the compilation settings, add dependency resolution or do other changes to the default behavior you need to provide your custom configuration. Some configuration options like building in `debug` mode without `optimizations` and `debugging` enabled are built in and can be specified on the command line. Others like where to find third party dependencies might require configuration file.
 
-#### Configuration File
+The configuration file follows the same structure as tje build cache. It is read by `ABuild` and settings specified in it either augments or overrides the defaults in the build cache.
+
+Example configuration:
+```
+{
+    "Toolchain": {
+        "name": "clang"
+    }
+}
+```
+
+#### Usage
+
+The typical usage would be switching to the root directory of the project that is to be built and running `abuild` executable without any parameters. It is also possible to run `abuild` against a single file or subdirectory building only a part of the project (including its dependencies). There is only a single configuration file where all customizations are specified. These can further be overriden from the command line parameters.
+
+Examples:
+
+Default behaviour
+```
+abuild
+```
+
+Overriding configuration on the command line
+```
+abuild "{ 'Toolchain': { 'name': 'clang' } }"
+```
